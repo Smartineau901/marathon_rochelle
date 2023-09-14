@@ -76,6 +76,9 @@ void MainWindow::gerer_donnees()
     // Réception des données
     QByteArray reponse = tcpSocket->readAll();
 
+    QStringList liste = phrase.split(",");
+
+
 
 
     // Affichage
