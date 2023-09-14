@@ -32,6 +32,8 @@ private slots:
 
     void mettre_a_jour_ihm();
 
+    void demander_trame();
+
 private:
     Ui::MainWindow *ui;
     QTcpSocket *tcpSocket;

@@ -21,10 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :
     pTimer = new QTimer();
 
     // Association du "tick" du timer à l'appel d'une méthode SLOT
-    connect(pTimer, SIGNAL(timeout()), this, SLOT(mettre_a_jour_ihm()));
+    connect(pTimer, SIGNAL(timeout()), this, SLOT(demander_trame()));
 
-    // Lancement du timer avec un tick toutes les 1000 ms
-    pTimer->start(1000);
+
 }
 
 
@@ -53,12 +52,15 @@ void MainWindow::on_connexionButton_clicked()
 
     // Connexion au serveur
     tcpSocket->connectToHost(adresse_ip, port_tcp);
+    pTimer->start(1000);
 }
 
 void MainWindow::on_deconnexionButton_clicked()
 {
     // Déconnexion du serveur
     tcpSocket->close();
+    pTimer->stop();
+
 }
 
 void MainWindow::on_envoiButton_clicked()
@@ -71,24 +73,50 @@ void MainWindow::on_envoiButton_clicked()
     tcpSocket->write(requete);
 }
 
+
 void MainWindow::gerer_donnees()
 {
     // Réception des données
     QByteArray reponse = tcpSocket->readAll();
-
-    QStringList liste = phrase.split(",");
-
-
-
+    QString trame = QString(reponse);
+    qDebug() << "trame : " <<trame;
 
     // Affichage
-    ui->lineEdit_reponse->setText(QString(reponse));
+    ui->lineEdit_reponse->setText(trame);
+
+
+    //decodage
+    QStringList liste = trame.split(",");
+
+    int heures = liste[1].mid(0,2).toInt();
+    int minutes = liste[1].mid(2,2).toInt();
+    int secondes = liste[1].mid(4,2).toInt();
+    qDebug() << "heure :"<<  liste[1].mid(0,2);
+    qDebug() << "minutes :"<<  liste[1].mid(2,2);
+    qDebug() << "secondes :"<<  liste[1].mid(4,2);
+    int timestamp = (heures * 3600 + minutes * 60 + secondes);
+    qDebug() << "timestamp : " << timestamp;
+    QString timestampQString = QString ("%1").arg(timestamp);
+//dddd
+
+}
+
+void MainWindow::demander_trame()
+{
+    qDebug() << "tic";
+
+    QByteArray requete;
+    requete = "RETR\r\n";
+    // Envoi de la requête
+    tcpSocket->write(requete);
+
 }
 
 void MainWindow::mettre_a_jour_ihm()
 {
     qDebug() <<"tic";
 }
+
 void MainWindow::afficher_erreur(QAbstractSocket::SocketError socketError)
 {
     switch (socketError)
