@@ -97,7 +97,13 @@ void MainWindow::gerer_donnees()
     int timestamp = (heures * 3600 + minutes * 60 + secondes);
     qDebug() << "timestamp : " << timestamp;
     QString timestampQString = QString ("%1").arg(timestamp);
-//dddd
+
+
+    int degres = liste[2].mid(0,2).toInt();
+    qDebug() << "Degrés :" << liste[2].mid(0,2) ;
+    // int Longitude = (degres + longitude_minute / 60);
+
+
 
 }
 

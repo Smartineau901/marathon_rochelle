@@ -17,8 +17,8 @@
    <widget class="QLabel" name="label_1">
     <property name="geometry">
      <rect>
-      <x>446</x>
-      <y>10</y>
+      <x>840</x>
+      <y>20</y>
       <width>171</width>
       <height>16</height>
      </rect>
@@ -30,8 +30,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>446</x>
-      <y>40</y>
+      <x>840</x>
+      <y>50</y>
       <width>191</width>
       <height>16</height>
      </rect>
@@ -43,8 +43,8 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>820</x>
-      <y>110</y>
+      <x>680</x>
+      <y>100</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -56,8 +56,8 @@
    <widget class="QLineEdit" name="lineEdit_ip">
     <property name="geometry">
      <rect>
-      <x>1050</x>
-      <y>20</y>
+      <x>850</x>
+      <y>440</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -69,8 +69,8 @@
    <widget class="QLineEdit" name="lineEdit_port">
     <property name="geometry">
      <rect>
-      <x>1050</x>
-      <y>50</y>
+      <x>850</x>
+      <y>470</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -82,8 +82,8 @@
    <widget class="QLineEdit" name="lineEdit_requete">
     <property name="geometry">
      <rect>
-      <x>1050</x>
-      <y>90</y>
+      <x>850</x>
+      <y>510</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -95,8 +95,8 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>80</y>
+      <x>840</x>
+      <y>90</y>
       <width>191</width>
       <height>16</height>
      </rect>
@@ -121,8 +121,8 @@
    <widget class="QPushButton" name="connexionButton">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>10</y>
+      <x>570</x>
+      <y>400</y>
       <width>121</width>
       <height>23</height>
      </rect>
@@ -134,8 +134,8 @@
    <widget class="QPushButton" name="deconnexionButton">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>40</y>
+      <x>570</x>
+      <y>430</y>
       <width>121</width>
       <height>23</height>
      </rect>
@@ -160,7 +160,7 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>840</x>
       <y>130</y>
       <width>191</width>
       <height>16</height>
@@ -173,7 +173,7 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>840</x>
       <y>160</y>
       <width>191</width>
       <height>16</height>
@@ -186,14 +186,144 @@
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>140</y>
+      <x>840</x>
+      <y>190</y>
       <width>191</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Fréquence cardiaque (en bpm) :</string>
+     <string>Intensité de l'effort (en %) :</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_ip_2">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>160</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>192.168.1.15</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_ip_3">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>130</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>192.168.1.15</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_ip_4">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>80</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>192.168.1.15</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_ip_5">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>50</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>192.168.1.15</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_ip_6">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>20</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>220</y>
+      <width>321</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>270</y>
+      <width>191</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Intensité de l'effort (en %) :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>300</y>
+      <width>191</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Intensité de l'effort (en %) :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>360</y>
+      <width>191</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Intensité de l'effort (en %) :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>330</y>
+      <width>191</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Intensité de l'effort (en %) :</string>
     </property>
    </widget>
   </widget>
