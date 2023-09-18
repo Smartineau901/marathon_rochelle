@@ -284,7 +284,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Intensité de l'effort (en %) :</string>
+     <string>Temps écoulé (en s) : </string>
     </property>
    </widget>
    <widget class="QLabel" name="label_9">
@@ -297,7 +297,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Intensité de l'effort (en %) :</string>
+     <string>Distance parcourue (en km) :</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_10">
@@ -310,7 +310,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Intensité de l'effort (en %) :</string>
+     <string>Calories dépensées (en kcal) :</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_12">
@@ -323,7 +323,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Intensité de l'effort (en %) :</string>
+     <string>Vitesse (en km) :</string>
     </property>
    </widget>
   </widget>

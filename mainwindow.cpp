@@ -79,14 +79,28 @@ void MainWindow::gerer_donnees()
     // Réception des données
     QByteArray reponse = tcpSocket->readAll();
     QString trame = QString(reponse);
+    QStringList liste = trame.split(",");
+    QString horaire = liste[1];
+    QString lat = liste[2];
+    QString N_or_S = liste[3];
+    QString lon = liste[4];
+    QString W_or_E = liste[5];
+    QString postype = liste[6];
+    QString nb_satellite = liste[7];
+    QString precision_horizontale = liste[8];
+    QString altitude = liste[9];
+    QString unite_altitude = liste[10];
+    QString hauteur_geo = liste[11];
+    QString unite_hauteur = liste[12];
+    QString tps_last_maj = liste[13];
+    QString frequence_cardiaque = liste[14];
     qDebug() << "trame : " <<trame;
 
     // Affichage
     ui->lineEdit_reponse->setText(trame);
 
 
-    //decodage
-    QStringList liste = trame.split(",");
+    //Décodage de la Trame
 
     int heures = liste[1].mid(0,2).toInt();
     int minutes = liste[1].mid(2,2).toInt();
@@ -98,10 +112,65 @@ void MainWindow::gerer_donnees()
     qDebug() << "timestamp : " << timestamp;
     QString timestampQString = QString ("%1").arg(timestamp);
 
+        // Latitude
+    double degres_lat = liste[2].mid(0,2).toDouble();
+    qDebug() << "Degrés :" << degres_lat ;
+    double minutes_lat = liste[2].mid(2,3).toDouble();
+    qDebug() <<"Latitude_Minutes :" << minutes_lat;
 
-    int degres = liste[2].mid(0,2).toInt();
-    qDebug() << "Degrés :" << liste[2].mid(0,2) ;
-    // int Longitude = (degres + longitude_minute / 60);
+    double latitude = (degres_lat + minutes_lat/ 60);
+    qDebug() <<"Latitude :" << latitude;
+
+
+    if( N_or_S == "S"){
+        latitude = (degres_lat + (minutes_lat / 60))*(-1);
+    }else if(N_or_S == "N"){
+        latitude = degres_lat + (minutes_lat / 60);
+
+    }else{
+        latitude =(degres_lat + (minutes_lat / 60));
+    }
+
+        //Longitude degrés et minutes
+    double degres_long = liste[4].mid(0,3).toDouble();
+    qDebug() << "Degrés :" << degres_long ;
+    double minutes_long = liste[4].mid(3,7).toDouble();
+    qDebug() <<"Latitude_Minutes :" << minutes_long;
+
+        //Calcule de la Longitude
+    double longitude = (degres_long + minutes_long / 60);
+    qDebug() <<"Longitude :" << longitude;
+
+    if( W_or_E == "W"){
+        longitude = (degres_long + (minutes_long / 60))*(-1);
+    }else if(W_or_E == "E"){
+        longitude = degres_long + (minutes_long / 60);
+
+    }else{
+        longitude =(degres_long + (minutes_long / 60));
+    }
+
+    //Type de positionnement
+    int positionnement = liste[6].mid(0,1).toInt();
+    if (liste[6].mid(0,1).toInt() == 1)
+    {
+        qDebug() << "Type de positionnement : GPS";
+    }
+    else{
+        qDebug() << "Type de positionnement :" << positionnement;
+    }
+
+    //Nb de Satellites
+    nb_satellite = liste[7].mid(0,2);
+    qDebug() << "Nombre de Satellites  :" << nb_satellite ;
+
+
+
+
+
+
+
+
 
 
 
