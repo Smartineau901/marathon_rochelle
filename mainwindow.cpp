@@ -26,9 +26,24 @@ MainWindow::MainWindow(QWidget *parent) :
     // Instanciation de l'image (dans constructeur)
     pCarte = new QImage();
     // Chargement depuis un fichier
+    pCarte->load(":/PlanTransparent.png");
+    // Affichage dans un QLabel, ici label_carte
+    ui->labelCarteTransparente->setPixmap(QPixmap::fromImage(*pCarte));
+
+    pCartePlan = new QImage();
+    // Chargement depuis un fichier
     pCarte->load(":/carte_la_rochelle_plan.png");
     // Affichage dans un QLabel, ici label_carte
-    ui->labelCarte->setPixmap(QPixmap::fromImage(*pCarte));
+    ui->labelCartePlan->setPixmap(QPixmap::fromImage(*pCartePlan));
+
+    pCarteSatellite = new QImage();
+    // Chargement depuis un fichier
+    pCarte->load(":/carte_la_rochelle_satellite.png");
+    // Affichage dans un QLabel, ici label_carte
+    ui->labelCartePlan->setPixmap(QPixmap::fromImage(*pCarteSatellite));
+
+
+
 
 
 }
@@ -46,7 +61,9 @@ MainWindow::~MainWindow()
     // Destruction de l'objet
     delete pTimer;
 
-
+    delete pCarte;
+    delete pCartePlan;
+    delete pCarteSatellite;
     // Destruction de l'interface graphique
     delete ui;
 }
@@ -87,20 +104,17 @@ void MainWindow::gerer_donnees()
     QByteArray reponse = tcpSocket->readAll();
     QString trame = QString(reponse);
     QStringList liste = trame.split(",");
-    QString horaire = liste[1];
+
     QString lat = liste[2];
-    QString N_or_S = liste[3];
+
     QString lon = liste[4];
-    QString W_or_E = liste[5];
+
     QString postype = liste[6];
-    QString nb_satellite = liste[7];
-    QString precision_horizontale = liste[8];
-    QString altitude = liste[9];
-    QString unite_altitude = liste[10];
-    QString hauteur_geo = liste[11];
-    QString unite_hauteur = liste[12];
-    QString tps_last_maj = liste[13];
-    QString frequence_cardiaque = liste[14];
+
+
+
+
+
     qDebug() << "trame : " <<trame;
 
     // Affichage
@@ -109,6 +123,7 @@ void MainWindow::gerer_donnees()
 
     //Décodage de la Trame
 
+    QString horaire = liste[1];
     int heures = liste[1].mid(0,2).toInt();
     int minutes = liste[1].mid(2,2).toInt();
     int secondes = liste[1].mid(4,2).toInt();
@@ -122,13 +137,13 @@ void MainWindow::gerer_donnees()
         // Latitude
     double degres_lat = liste[2].mid(0,2).toDouble();
     qDebug() << "Degrés :" << degres_lat ;
-    double minutes_lat = liste[2].mid(2,3).toDouble();
+    double minutes_lat = liste[2].mid(2,7).toDouble();
     qDebug() <<"Latitude_Minutes :" << minutes_lat;
 
-    double latitude = (degres_lat + minutes_lat/ 60);
+    double latitude = (degres_lat + minutes_lat/ 60.0);
     qDebug() <<"Latitude :" << latitude;
 
-
+    QString N_or_S = liste[3];
     if( N_or_S == "S"){
         latitude = (degres_lat + (minutes_lat / 60))*(-1);
     }else if(N_or_S == "N"){
@@ -148,12 +163,17 @@ void MainWindow::gerer_donnees()
     double longitude = (degres_long + minutes_long / 60);
     qDebug() <<"Longitude :" << longitude;
 
-    if( W_or_E == "W"){
+    QString W_or_E = liste[5];
+    if( W_or_E == "W")
+    {
         longitude = (degres_long + (minutes_long / 60))*(-1);
-    }else if(W_or_E == "E"){
+    }
+    else if(W_or_E == "E")
+    {
         longitude = degres_long + (minutes_long / 60);
-
-    }else{
+    }
+    else
+    {
         longitude =(degres_long + (minutes_long / 60));
     }
 
@@ -163,27 +183,69 @@ void MainWindow::gerer_donnees()
     {
         qDebug() << "Type de positionnement : GPS";
     }
-    else{
+
+    else
+    {
         qDebug() << "Type de positionnement :" << positionnement;
     }
 
     //Nb de Satellites
+    QString nb_satellite = liste[7];
     nb_satellite = liste[7].mid(0,2);
     qDebug() << "Nombre de Satellites  :" << nb_satellite ;
 
+     //Précision horizontale
+    QString precision_horizontale = liste[8];
+    qDebug() <<"Précision Horizontale :" << precision_horizontale;
 
+     //Affichache Altitude
+    QString altitude = liste[9];
+    qDebug() <<"Altitude du Courreur :" << altitude;
+
+     //Unité de l'Altitude
+    QString unite_altitude = liste[10];
+    qDebug() << "Altitude en :" << unite_altitude;
+
+    QString hauteur_geo = liste[11];
+    qDebug() << "Hauteur en Géodésique au dessus de l'éllipsoïde WGS84 " << hauteur_geo;
+
+    QString unite_hauteur = liste[12];
+    qDebug() << "Géodésique en :" << unite_altitude;
+
+    QString tps_last_maj = liste[13];
+    qDebug() << "Temps depuis la dernière mise à jours : " << tps_last_maj;
+
+
+    QString frequence_cardiaque = liste[14];
+    qDebug() << "Fréquence Cardiaque du courreur :" << frequence_cardiaque;
+
+
+    float px = 694.0 * ((longitude + 1.195703) / ( -1.136125 + 1.195703) );
+    float py = 638.0 * ( 1.0 - (latitude - 46.135451) / (46.173311 - 46.135451));
+
+
+    qDebug() << "px :"<< px  ;
+    qDebug() << "py :"<< py  ;
 
     // Préparation du contexte de dessin sur une image existante
     QPainter p(pCarte);
     // Choix de la couleur
     p.setPen(Qt::red);
+
+    if ((lastpx != 0.0) && (lastpy != 0.0))
+    {
     // Dessin d'une ligne
-    p.drawLine(10, 20, 250, 300);
-    p.drawText(10,30, "Hello world");
-    p.fillRect(10, 20, 250, 300, QColor(120, 255, 0));
+    p.drawLine(lastpx, lastpy, px, py);
     // Fin du dessin et application sur l'image
     p.end();
-    ui->labelCarte->setPixmap(QPixmap::fromImage(*pCarte));
+    ui->labelCarteTransparente->setPixmap(QPixmap::fromImage(*pCarte));
+    }
+
+    else{
+    }
+    lastpx = px;
+    lastpy = py;
+
 
 
 }

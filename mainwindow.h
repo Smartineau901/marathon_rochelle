@@ -41,6 +41,11 @@ private:
     QTcpSocket *tcpSocket;
     QTimer *pTimer;
     QImage *pCarte;
+    QImage *pCartePlan;
+    QImage *pCarteSatellite;
+    float lastpx;
+    float lastpy;
+
 };
 
 #endif // MAINWINDOW_H
