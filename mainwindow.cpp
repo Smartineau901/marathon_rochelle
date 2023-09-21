@@ -23,6 +23,13 @@ MainWindow::MainWindow(QWidget *parent) :
     // Association du "tick" du timer à l'appel d'une méthode SLOT
     connect(pTimer, SIGNAL(timeout()), this, SLOT(demander_trame()));
 
+    // Instanciation de l'image (dans constructeur)
+    pCarte = new QImage();
+    // Chargement depuis un fichier
+    pCarte->load(":/carte_la_rochelle_plan.png");
+    // Affichage dans un QLabel, ici label_carte
+    ui->labelCarte->setPixmap(QPixmap::fromImage(*pCarte));
+
 
 }
 
@@ -166,12 +173,17 @@ void MainWindow::gerer_donnees()
 
 
 
-
-
-
-
-
-
+    // Préparation du contexte de dessin sur une image existante
+    QPainter p(pCarte);
+    // Choix de la couleur
+    p.setPen(Qt::red);
+    // Dessin d'une ligne
+    p.drawLine(10, 20, 250, 300);
+    p.drawText(10,30, "Hello world");
+    p.fillRect(10, 20, 250, 300, QColor(120, 255, 0));
+    // Fin du dessin et application sur l'image
+    p.end();
+    ui->labelCarte->setPixmap(QPixmap::fromImage(*pCarte));
 
 
 }
