@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Chargement depuis un fichier
     pCarte->load(":/carte_la_rochelle_satellite.png");
     // Affichage dans un QLabel, ici label_carte
-    ui->labelCartePlan->setPixmap(QPixmap::fromImage(*pCarteSatellite));
+    ui->labelCarteSattelite->setPixmap(QPixmap::fromImage(*pCarteSatellite));
 
 
 
@@ -104,17 +104,12 @@ void MainWindow::gerer_donnees()
     QByteArray reponse = tcpSocket->readAll();
     QString trame = QString(reponse);
     QStringList liste = trame.split(",");
+    int age = ui->Age->value();
 
-    QString lat = liste[2];
 
-    QString lon = liste[4];
+
 
     QString postype = liste[6];
-
-
-
-
-
     qDebug() << "trame : " <<trame;
 
     // Affichage
@@ -135,6 +130,8 @@ void MainWindow::gerer_donnees()
     QString timestampQString = QString ("%1").arg(timestamp);
 
         // Latitude
+
+    QString Latitude = liste[2];
     double degres_lat = liste[2].mid(0,2).toDouble();
     qDebug() << "Degrés :" << degres_lat ;
     double minutes_lat = liste[2].mid(2,7).toDouble();
@@ -142,6 +139,9 @@ void MainWindow::gerer_donnees()
 
     double latitude = (degres_lat + minutes_lat/ 60.0);
     qDebug() <<"Latitude :" << latitude;
+    //Mise en okace de latitude dans le lineEdit
+    ui->Latitude->setText(QString::number(latitude));
+
 
     QString N_or_S = liste[3];
     if( N_or_S == "S"){
@@ -153,6 +153,7 @@ void MainWindow::gerer_donnees()
         latitude =(degres_lat + (minutes_lat / 60));
     }
 
+
         //Longitude degrés et minutes
     double degres_long = liste[4].mid(0,3).toDouble();
     qDebug() << "Degrés :" << degres_long ;
@@ -162,6 +163,10 @@ void MainWindow::gerer_donnees()
         //Calcule de la Longitude
     double longitude = (degres_long + minutes_long / 60);
     qDebug() <<"Longitude :" << longitude;
+    ui->Longitude->setText(QString::number(longitude));
+
+
+
 
     QString W_or_E = liste[5];
     if( W_or_E == "W")
@@ -216,8 +221,14 @@ void MainWindow::gerer_donnees()
     qDebug() << "Temps depuis la dernière mise à jours : " << tps_last_maj;
 
 
-    QString frequence_cardiaque = liste[14];
+    QString frequence_cardiaque = liste[14].mid(1,3);
     qDebug() << "Fréquence Cardiaque du courreur :" << frequence_cardiaque;
+    ui->Frequence_cardiaque->setText(frequence_cardiaque);
+
+    int frequence_cardiaque_max = 220 - age;
+    ui->FC_max->setText(QString::number(frequence_cardiaque_max));
+
+
 
 
     float px = 694.0 * ((longitude + 1.195703) / ( -1.136125 + 1.195703) );
@@ -246,7 +257,7 @@ void MainWindow::gerer_donnees()
     lastpx = px;
     lastpy = py;
 
-
+    //bool;
 
 }
 
