@@ -4,8 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-QT      += network
+QT          += core gui
+QT          += network
+QT          += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,3 +24,6 @@ FORMS    += mainwindow.ui
 RESOURCES += \
     images.qrc \
     images.qrc
+
+DISTFILES += \
+    GpsTrrack.sqbpro

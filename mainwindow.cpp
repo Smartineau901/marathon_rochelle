@@ -42,6 +42,22 @@ MainWindow::MainWindow(QWidget *parent) :
     // Affichage dans un QLabel, ici label_carte
     ui->labelCarteSattelite->setPixmap(QPixmap::fromImage(*pCarteSatellite));
 
+    lastpx = 0.0;
+    lastpy = 0.0;
+
+    // "Connexion" à la base de données SQLite
+    bdd = QSqlDatabase::addDatabase("QSQLITE");
+    bdd.setDatabaseName("ma_bdd.sqlite");
+    if (!bdd.open())
+    {
+        qDebug() << "Error: connection with database fail";
+    }
+    else
+    {
+        qDebug() << "Database: connection ok";
+    }
+
+
 
 
 
@@ -51,6 +67,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+
+    //Fermeture de la base de donnée
+    bdd.close();
     // Destruction de la socket
     tcpSocket->abort();
     delete tcpSocket;
@@ -228,6 +247,16 @@ void MainWindow::gerer_donnees()
     int frequence_cardiaque_max = 220 - age;
     ui->FC_max->setText(QString::number(frequence_cardiaque_max));
 
+    int intensite_effort = (frequence_cardiaque.toInt() * 100 / frequence_cardiaque_max);
+    ui->intensite_effortPB->setValue(intensite_effort);
+
+
+
+
+
+    //int R = 6378;
+    //double distance = R * arccos( sin(latA) * sin(latB) + cos(latA) * cos(latB) * cos(lonA-lonB) )
+
 
 
 
@@ -257,7 +286,11 @@ void MainWindow::gerer_donnees()
     lastpx = px;
     lastpy = py;
 
-    //bool;
+
+
+
+
+
 
 }
 

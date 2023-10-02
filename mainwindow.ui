@@ -96,7 +96,7 @@
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>700</y>
+      <y>710</y>
       <width>561</width>
       <height>20</height>
      </rect>
@@ -248,7 +248,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar">
+   <widget class="QProgressBar" name="intensite_effortPB">
     <property name="geometry">
      <rect>
       <x>810</x>
@@ -406,6 +406,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
    </widget>
    <widget class="QSpinBox" name="Taille">
     <property name="geometry">
@@ -416,6 +419,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>230</number>
+    </property>
    </widget>
    <widget class="QSpinBox" name="Poids">
     <property name="geometry">
@@ -425,6 +431,9 @@
       <width>71</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>200</number>
     </property>
    </widget>
    <widget class="QLineEdit" name="temps_ecoule">
@@ -483,6 +492,19 @@
      <pixmap resource="images.qrc">:/carte_la_rochelle_satellite.png</pixmap>
     </property>
    </widget>
+   <widget class="QCheckBox" name="checkBox">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>680</y>
+      <width>76</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sattélite</string>
+    </property>
+   </widget>
    <zorder>label_1</zorder>
    <zorder>label_2</zorder>
    <zorder>label_3</zorder>
@@ -501,13 +523,12 @@
    <zorder>Altitude</zorder>
    <zorder>Longitude</zorder>
    <zorder>Latitude</zorder>
-   <zorder>progressBar</zorder>
+   <zorder>intensite_effortPB</zorder>
    <zorder>label_8</zorder>
    <zorder>label_9</zorder>
    <zorder>label_10</zorder>
    <zorder>label_12</zorder>
    <zorder>labelCartePlan</zorder>
-   <zorder>labelCarteTransparente</zorder>
    <zorder>label</zorder>
    <zorder>label_11</zorder>
    <zorder>label_13</zorder>
@@ -519,7 +540,9 @@
    <zorder>lineEdit</zorder>
    <zorder>vitesse</zorder>
    <zorder>calories</zorder>
+   <zorder>checkBox</zorder>
    <zorder>labelCarteSattelite</zorder>
+   <zorder>labelCarteTransparente</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
