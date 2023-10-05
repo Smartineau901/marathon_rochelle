@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Client TCP v0.1</string>
+   <string>Trainer Supervisor v0.1</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLabel" name="label_1">
@@ -329,7 +329,7 @@
      <pixmap resource="images.qrc">:/PlanTransparent.png</pixmap>
     </property>
    </widget>
-   <widget class="QLabel" name="labelCartePlan">
+   <widget class="QLabel" name="labelCarte">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -340,9 +340,6 @@
     </property>
     <property name="text">
      <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="images.qrc">:/carte_la_rochelle_plan.png</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -476,7 +473,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="labelCarteSattelite">
+   <widget class="QLabel" name="labelCarteSatellite">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -487,9 +484,6 @@
     </property>
     <property name="text">
      <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="images.qrc">:/carte_la_rochelle_satellite.png</pixmap>
     </property>
    </widget>
    <widget class="QCheckBox" name="checkBox">
@@ -505,6 +499,56 @@
      <string>Sattélite</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="buttonSatellite">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>630</y>
+      <width>121</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Carte Satellite</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonPlan">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>630</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Carte Plan</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>600</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Nombre de Satellites</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NbSatellite">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>600</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>labelCarteSatellite</zorder>
    <zorder>label_1</zorder>
    <zorder>label_2</zorder>
    <zorder>label_3</zorder>
@@ -528,7 +572,7 @@
    <zorder>label_9</zorder>
    <zorder>label_10</zorder>
    <zorder>label_12</zorder>
-   <zorder>labelCartePlan</zorder>
+   <zorder>labelCarte</zorder>
    <zorder>label</zorder>
    <zorder>label_11</zorder>
    <zorder>label_13</zorder>
@@ -541,8 +585,11 @@
    <zorder>vitesse</zorder>
    <zorder>calories</zorder>
    <zorder>checkBox</zorder>
-   <zorder>labelCarteSattelite</zorder>
+   <zorder>buttonSatellite</zorder>
+   <zorder>buttonPlan</zorder>
    <zorder>labelCarteTransparente</zorder>
+   <zorder>label_15</zorder>
+   <zorder>NbSatellite</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

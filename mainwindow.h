@@ -39,6 +39,10 @@ private slots:
 
     void demander_trame();
 
+    void on_buttonSatellite_clicked();
+
+    void on_buttonPlan_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTcpSocket *tcpSocket;

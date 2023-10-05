@@ -32,15 +32,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     pCartePlan = new QImage();
     // Chargement depuis un fichier
-    pCarte->load(":/carte_la_rochelle_plan.png");
-    // Affichage dans un QLabel, ici label_carte
-    ui->labelCartePlan->setPixmap(QPixmap::fromImage(*pCartePlan));
+    pCartePlan->load(":/carte_la_rochelle_plan.png");
+    ui->labelCarte->setPixmap(QPixmap::fromImage(*pCartePlan));
+
 
     pCarteSatellite = new QImage();
     // Chargement depuis un fichier
-    pCarte->load(":/carte_la_rochelle_satellite.png");
-    // Affichage dans un QLabel, ici label_carte
-    ui->labelCarteSattelite->setPixmap(QPixmap::fromImage(*pCarteSatellite));
+    pCarteSatellite->load(":/carte_la_rochelle_satellite.png");
+
+
 
 
 
@@ -130,6 +130,8 @@ void MainWindow::on_deconnexionButton_clicked()
 
 }
 
+
+
 void MainWindow::on_envoiButton_clicked()
 {
     // Préparation de la requête
@@ -138,6 +140,18 @@ void MainWindow::on_envoiButton_clicked()
 
     // Envoi de la requête
     tcpSocket->write(requete);
+}
+
+void MainWindow::on_buttonSatellite_clicked()
+{
+    ui->labelCarte->setPixmap(QPixmap::fromImage(*pCarteSatellite));
+}
+
+
+void MainWindow::on_buttonPlan_clicked()
+{
+    ui->labelCarte->setPixmap(QPixmap::fromImage(*pCartePlan));
+
 }
 
 
@@ -241,6 +255,8 @@ void MainWindow::gerer_donnees()
     QString nb_satellite = liste[7];
     nb_satellite = liste[7].mid(0,2);
     qDebug() << "Nombre de Satellites  :" << nb_satellite ;
+    ui->NbSatellite->setText(nb_satellite);
+
 
      //Précision horizontale
     QString precision_horizontale = liste[8];
@@ -271,12 +287,10 @@ void MainWindow::gerer_donnees()
     int frequence_cardiaque_max = 220 - age;
     ui->FC_max->setText(QString::number(frequence_cardiaque_max));
 
-    // Changement de Carte
-    if (ui->checkBox->isChecked()) {
-        ui->labelCarteSattelite->setPixmap(QPixmap::fromImage(*pCarteSatellite));
-    } else {
-        ui->labelCartePlan->setPixmap(QPixmap::fromImage(*pCartePlan));
-    }
+
+
+
+
 
 
 
@@ -290,9 +304,9 @@ void MainWindow::gerer_donnees()
     if (long_rad && lat_rad && lastlat_rad && lastlong_rad != 0.0) {
         calcul_distance = 6378.0 * acos((sin(lastlat_rad) * sin(lat_rad)) + (cos(lastlat_rad) * cos(lat_rad) * cos(lastlong_rad - long_rad)));
         distance = lastdistance + calcul_distance;
-        QString distance_string = QString("%1").arg(distance);
-        qDebug() << "Distance : " << distance_string;
-        ui->lineEdit_Distance->setText(distance_string);
+        QString Distance = QString("%1").arg(distance);
+        qDebug() << "Distance : " << Distance;
+        ui->lineEdit_Distance->setText(Distance);
     } else {
     }
 
@@ -309,6 +323,8 @@ void MainWindow::gerer_donnees()
     QString vitesse_string = QString("%1").arg(vitesse);
     ui->vitesse->setText(vitesse_string);
 
+
+
     // Calories dépensées
     double poids = ui->Poids->value();
     double calories = distance * poids * 1.036;
@@ -316,8 +332,7 @@ void MainWindow::gerer_donnees()
     ui->calories->setText(calories_string);
 
 
-    //int R = 6378;
-    //double distance = R * arccos( sin(latA) * sin(latB) + cos(latA) * cos(latB) * cos(lonA-lonB) )
+
 
 
 
@@ -398,3 +413,6 @@ void MainWindow::afficher_erreur(QAbstractSocket::SocketError socketError)
                                      .arg(tcpSocket->errorString()));
     }
 }
+
+
+
