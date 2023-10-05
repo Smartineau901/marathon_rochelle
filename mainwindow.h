@@ -62,7 +62,6 @@ private:
     double lastdistance;
     int timestamp;
     int last_timestamp;
-    int compteur;
 
 };
 

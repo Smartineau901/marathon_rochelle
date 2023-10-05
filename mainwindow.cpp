@@ -72,7 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
     distance = 0.0;
     lastdistance = 0.0;
     last_timestamp = 0;
-    compteur = 0;
+
 
 
 
