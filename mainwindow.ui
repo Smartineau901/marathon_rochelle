@@ -96,7 +96,7 @@
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>710</y>
+      <y>700</y>
       <width>561</width>
       <height>20</height>
      </rect>
@@ -193,7 +193,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>192.168.1.15</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="Frequence_cardiaque">
@@ -206,20 +206,20 @@
      </rect>
     </property>
     <property name="text">
-     <string>192.168.1.15</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="Altitude">
     <property name="geometry">
      <rect>
       <x>1000</x>
-      <y>90</y>
+      <y>100</y>
       <width>113</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>192.168.1.15</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="Longitude">
@@ -232,7 +232,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>192.168.1.15</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="Latitude">
@@ -403,6 +403,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>15</number>
+    </property>
     <property name="maximum">
      <number>100</number>
     </property>
@@ -416,6 +419,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>20</number>
+    </property>
     <property name="maximum">
      <number>230</number>
     </property>
@@ -428,6 +434,9 @@
       <width>71</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="minimum">
+     <number>20</number>
     </property>
     <property name="maximum">
      <number>200</number>
@@ -484,19 +493,6 @@
     </property>
     <property name="text">
      <string/>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox">
-    <property name="geometry">
-     <rect>
-      <x>610</x>
-      <y>680</y>
-      <width>76</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Sattélite</string>
     </property>
    </widget>
    <widget class="QPushButton" name="buttonSatellite">
@@ -584,7 +580,6 @@
    <zorder>lineEdit_Distance</zorder>
    <zorder>vitesse</zorder>
    <zorder>calories</zorder>
-   <zorder>checkBox</zorder>
    <zorder>buttonSatellite</zorder>
    <zorder>buttonPlan</zorder>
    <zorder>labelCarteTransparente</zorder>
