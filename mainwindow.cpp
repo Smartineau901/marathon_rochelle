@@ -384,13 +384,13 @@ void MainWindow::gerer_donnees()
 
     else{
 
-        ui->temps_ecoule->setText("error");
-        ui->Latitude->setText("error");
-        ui->Longitude->setText("error");
-        ui->Altitude->setText("error");
-        ui->lineEdit_Distance->setText("error");
-        ui->calories->setText("error");
-        ui->vitesse->setText("error");
+        ui->temps_ecoule->setText("error pas assez de satellite");
+        ui->Latitude->setText("error pas assez de satellite");
+        ui->Longitude->setText("error pas assez de satellite");
+        ui->Altitude->setText("error pas assez de satellite");
+        ui->lineEdit_Distance->setText("error pas assez de satellite");
+        ui->calories->setText("error pas assez de satellite");
+        ui->vitesse->setText("error pas assez de satellite");
     }
 
 
