@@ -49,6 +49,16 @@ private:
     QSqlDatabase bdd;
     float lastpx;
     float lastpy;
+    double lat_rad;
+    double long_rad;
+    double lastlat_rad;
+    double lastlong_rad;
+    double calcul_distance;
+    double distance;
+    double lastdistance;
+    int timestamp;
+    int last_timestamp;
+    int compteur;
 
 };
 

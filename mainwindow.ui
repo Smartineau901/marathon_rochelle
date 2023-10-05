@@ -446,7 +446,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="lineEdit_Distance">
     <property name="geometry">
      <rect>
       <x>1000</x>
@@ -537,7 +537,7 @@
    <zorder>Taille</zorder>
    <zorder>Poids</zorder>
    <zorder>temps_ecoule</zorder>
-   <zorder>lineEdit</zorder>
+   <zorder>lineEdit_Distance</zorder>
    <zorder>vitesse</zorder>
    <zorder>calories</zorder>
    <zorder>checkBox</zorder>

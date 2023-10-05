@@ -42,8 +42,11 @@ MainWindow::MainWindow(QWidget *parent) :
     // Affichage dans un QLabel, ici label_carte
     ui->labelCarteSattelite->setPixmap(QPixmap::fromImage(*pCarteSatellite));
 
-    lastpx = 0.0;
-    lastpy = 0.0;
+
+
+
+
+
 
     // "Connexion" à la base de données SQLite
     bdd = QSqlDatabase::addDatabase("QSQLITE");
@@ -57,6 +60,19 @@ MainWindow::MainWindow(QWidget *parent) :
         qDebug() << "Database: connection ok";
     }
 
+
+
+    lastpx = 0.0;
+    lastpy = 0.0;
+    lat_rad = 0.0;
+    long_rad = 0.0;
+    lastlat_rad = 0.0;
+    lastlong_rad = 0.0;
+    calcul_distance = 0.0;
+    distance = 0.0;
+    lastdistance = 0.0;
+    last_timestamp = 0;
+    compteur = 0;
 
 
 
@@ -76,16 +92,24 @@ MainWindow::~MainWindow()
 
     // Arrêt du timer
     pTimer->stop();
-
     // Destruction de l'objet
     delete pTimer;
 
     delete pCarte;
+
     delete pCartePlan;
+
     delete pCarteSatellite;
+
+
     // Destruction de l'interface graphique
     delete ui;
 }
+
+double degToRad(double degrees) {
+    return degrees * M_PI / 180.0;
+}
+
 
 void MainWindow::on_connexionButton_clicked()
 {
@@ -247,11 +271,49 @@ void MainWindow::gerer_donnees()
     int frequence_cardiaque_max = 220 - age;
     ui->FC_max->setText(QString::number(frequence_cardiaque_max));
 
+    // Changement de Carte
+    if (ui->checkBox->isChecked()) {
+        ui->labelCarteSattelite->setPixmap(QPixmap::fromImage(*pCarteSatellite));
+    } else {
+        ui->labelCartePlan->setPixmap(QPixmap::fromImage(*pCartePlan));
+    }
+
+
+
+
     int intensite_effort = (frequence_cardiaque.toInt() * 100 / frequence_cardiaque_max);
     ui->intensite_effortPB->setValue(intensite_effort);
 
+    // Distance
+    lat_rad = degToRad(latitude);
+    long_rad = degToRad(longitude);
+    if (long_rad && lat_rad && lastlat_rad && lastlong_rad != 0.0) {
+        calcul_distance = 6378.0 * acos((sin(lastlat_rad) * sin(lat_rad)) + (cos(lastlat_rad) * cos(lat_rad) * cos(lastlong_rad - long_rad)));
+        distance = lastdistance + calcul_distance;
+        QString distance_string = QString("%1").arg(distance);
+        qDebug() << "Distance : " << distance_string;
+        ui->lineEdit_Distance->setText(distance_string);
+    } else {
+    }
 
 
+
+
+
+
+
+
+    // Vitesse
+    double diff_tps = timestamp - last_timestamp;
+    double vitesse = calcul_distance / (diff_tps / 3600.0);
+    QString vitesse_string = QString("%1").arg(vitesse);
+    ui->vitesse->setText(vitesse_string);
+
+    // Calories dépensées
+    double poids = ui->Poids->value();
+    double calories = distance * poids * 1.036;
+    QString calories_string = QString("%1").arg(calories);
+    ui->calories->setText(calories_string);
 
 
     //int R = 6378;
@@ -280,11 +342,17 @@ void MainWindow::gerer_donnees()
     p.end();
     ui->labelCarteTransparente->setPixmap(QPixmap::fromImage(*pCarte));
     }
-
     else{
     }
+
+
     lastpx = px;
     lastpy = py;
+    lastlat_rad = lat_rad;
+    lastlong_rad = long_rad;
+    lastdistance = distance;
+    last_timestamp = timestamp;
+
 
 
 
